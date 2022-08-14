@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@id/moviesFragment">
+
+    <fragment
+        android:id="@+id/moviesFragment"
+        android:name="uz.isystem.tmdbapp.ui.main.home.MoviesFragment"
+        android:label="MoviesFragment"
+        tools:layout="@layout/fragment_movies">
+        <action
+            android:id="@+id/action_moviesFragment_to_celebritiesFragment2"
+            app:destination="@id/celebritiesFragment" />
+        <action
+            android:id="@+id/action_moviesFragment_to_searchFragment2"
+            app:destination="@id/searchFragment" />
+        <action
+            android:id="@+id/action_moviesFragment_to_TMDBFragment2"
+            app:destination="@id/TMDBFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/celebritiesFragment"
+        android:name="com.example.movieapp.ui.main.home.searchFragment.CelebritiesFragment"
+        android:label="CelebritiesFragment"
+        tools:layout="@layout/fragment_celebrities" />
+    <fragment
+        android:id="@+id/searchFragment"
+        android:name="com.example.movieapp.ui.main.home.searchFragment.SearchFragment"
+        android:label="SearchFragment"
+        tools:layout="@layout/fragment_search" />
+    <fragment
+        android:id="@+id/TMDBFragment"
+        android:name="uz.isystem.tmdbapp.ui.accountTmdb.TMDBFragment"
+        android:label="TMDBFragment"
+        tools:layout="@layout/fragment_tmdb">
+        <action
+            android:id="@+id/action_TMDBFragment_to_FragmentInfo"
+            app:destination="@id/FragmentInfo" />
+        <action
+            android:id="@+id/action_TMDBFragment_to_FragmentContact"
+            app:destination="@id/FragmentContact" />
+        <action
+            android:id="@+id/action_TMDBFragment_to_FragmentFavorite"
+            app:destination="@id/FragmentFavorite" />
+    </fragment>
+    <fragment
+        android:id="@+id/FragmentInfo"
+        android:name="uz.isystem.tmdbapp.ui.accountTmdb.FragmentInfoApp"
+        android:label="FragmentInfo"
+        tools:layout="@layout/fragment_info"></fragment>
+
+    <fragment
+        android:id="@+id/FragmentContact"
+        android:name="uz.isystem.tmdbapp.ui.accountTmdb.FragmentContact"
+        android:label="FragmentContact"
+        tools:layout="@layout/fragment_contact" />
+
+    <fragment
+        android:id="@+id/FragmentFavorite"
+        android:name="uz.isystem.tmdbapp.ui.accountTmdb.FragmentFavorite"
+        android:label="FragmentFavorite"
+        tools:layout="@layout/fragment_favourit" />
+</navigation>
