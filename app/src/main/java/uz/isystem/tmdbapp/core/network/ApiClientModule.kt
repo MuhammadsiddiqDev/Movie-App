@@ -1,8 +1,4 @@
 package uz.isystem.tmdbapp.core.network
-
-import com.chuckerteam.chucker.api.ChuckerCollector
-import com.chuckerteam.chucker.api.ChuckerInterceptor
-import com.chuckerteam.chucker.api.RetentionManager
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -14,7 +10,6 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import uz.isystem.tmdbapp.BuildConfig
-import uz.isystem.tmdbapp.core.app.App
 import uz.isystem.tmdbapp.core.network.networkServices.*
 import java.util.concurrent.TimeUnit
 
@@ -74,28 +69,43 @@ object ApiClientModule {
             .writeTimeout(1, TimeUnit.MINUTES)
             .readTimeout(1, TimeUnit.MINUTES)
             .addInterceptor(getHttpLoggingInterceptor())
-            .addInterceptor(getChuckerInterceptor())
+//            .addInterceptor(getChuckerInterceptor())
             .addInterceptor(interceptor())
             .build()
     }
 
 
-    private fun getChuckerCollector(): ChuckerCollector {
-        return ChuckerCollector(
-            context = App.instance!!,
-            showNotification = true,
-            retentionPeriod = RetentionManager.Period.FOREVER
-        )
-    }
+//    private fun getChuckerCollector(): ChuckerCollector {
+//        return ChuckerCollector(
+//            context = App.instance!!,
+//            showNotification = true,
+//            retentionPeriod = RetentionManager.Period.FOREVER
+//        )
+//    }
 
-    private fun getChuckerInterceptor(): ChuckerInterceptor {
-        return ChuckerInterceptor.Builder(App.instance!!)
-            .collector(getChuckerCollector())
-            .maxContentLength(250_000L)
-            .alwaysReadResponseBody(true)
-            .build()
-
-    }
+//    private fun getChuckerInterceptor(): ChuckerInterceptor {
+//        return ChuckerInterceptor.Builder(App.instance!!)
+//            .collector(getChuckerCollector())
+//            .maxContentLength(250_000L)
+//            .alwaysReadResponseBody(true)
+//            .build()
+//
+//    }
+//    private fun getChuckerCollector(): ChuckerCollector {
+//        return ChuckerCollector(
+//            context = App.instance!!,
+//            showNotification = true,
+//            retentionPeriod = RetentionManager.Period.FOREVER
+//        )
+//    }
+//    private fun getChuckerInterceptor(): ChuckerInterceptor {
+//        return ChuckerInterceptor.Builder(App.instance!!)
+//            .collector(getChuckerCollector())
+//            .maxContentLength(250_000L)
+//            .alwaysReadResponseBody(true)
+//            .build()
+//
+//    }
 
 
     private fun getApiClient(): Retrofit {

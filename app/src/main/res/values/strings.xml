@@ -1,8 +1,7 @@
 <resources>
     <string name="app_name">TMDB App</string>
     <string name="link_click">
-
         <ul><il><a href="https://www.themoviedb.org/signup?language=ru">SING UP</a></il></ul>
-
+        <ul><il><a href="https://www.themoviedb.org/signup?language=ru">SIGN UP</a></il></ul>
     </string>
 </resources>
