@@ -14,8 +14,9 @@ class SeeAllActorAdapter : RecyclerView.Adapter<SeeAllActorAdapter.ViewHolder>()
     var onItemClicked: ((Cast) -> Unit)? = null
 
     fun setData(data: List<Cast>) {
+        this.data.clear()
         this.data.addAll(data)
-        notifyItemRangeChanged(data.size, data.size - 1)
+        notifyItemRangeInserted(this.data.size - data.size, data.size)
     }
 
     inner class ViewHolder(val binding: ItemSeeAllCelebritiesBinding) :

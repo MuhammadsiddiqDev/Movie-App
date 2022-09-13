@@ -13,8 +13,9 @@ class TopRatedAdapter : RecyclerView.Adapter<TopRatedAdapter.ViewHolder>() {
     var onItemClicked: ((MovieData) -> Unit)? = null
 
     fun setData(data: List<MovieData>) {
+        this.data.clear()
         this.data.addAll(data)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(this.data.size - data.size, data.size)
     }
 
     inner class ViewHolder(private val binding: ItemTopRatedBinding) :

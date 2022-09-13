@@ -1,6 +1,7 @@
 package uz.isystem.tmdbapp.ui.login
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
 import android.view.View
@@ -32,6 +33,14 @@ class LoginActivity : BaseActivity(), LoginMVP.View {
     override fun onCreated(savedInstanceState: Bundle?) {
         presenter = LoginPresenter(this)
 
+        binding.singUp.setOnClickListener {
+            val browserIntent =
+                Intent(
+                    Intent.ACTION_VIEW,
+                    Uri.parse("https://www.themoviedb.org/signup?language=ru")
+                )
+            startActivity(browserIntent)
+        }
 
         binding.singIn.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE

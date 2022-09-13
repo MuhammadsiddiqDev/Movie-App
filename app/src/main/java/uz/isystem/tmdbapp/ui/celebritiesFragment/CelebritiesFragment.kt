@@ -93,11 +93,19 @@ class CelebritiesFragment : BaseFragment(), CelebritiesMVP.View {
     override fun getCelebritiesCast(popularResponse: PeoplePopularResponse) {
         binding.progressBar.visibility = View.GONE
         celebritiesAdapter.setData(popularResponse.results)
+        if (popularResponse.results.isNotEmpty()) {
+            binding.popularTitle.visibility = View.VISIBLE
+            binding.allButtonPopular.visibility = View.VISIBLE
+        }
     }
 
     override fun getCelebritiesTrending(popularResponse: PeoplePopularResponse) {
         binding.progressBar.visibility = View.GONE
         trendingAdapter.setData(popularResponse.results)
+        if (popularResponse.results.isNotEmpty()) {
+            binding.trendTitle.visibility = View.VISIBLE
+            binding.allButtonTrending.visibility = View.VISIBLE
+        }
     }
 
     override fun onError(message: String) {

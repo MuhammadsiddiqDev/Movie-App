@@ -14,7 +14,7 @@ class UpcomingAdapter : RecyclerView.Adapter<UpcomingAdapter.ViewHolder>() {
 
     fun setData(data: List<MovieData>) {
         this.data.addAll(data)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(this.data.size - data.size, data.size)
     }
 
     inner class ViewHolder(private val binding: ItemNowPlayingBinding) :
