@@ -14,8 +14,9 @@ class CastAdapter : RecyclerView.Adapter<CastAdapter.ViewHolder>() {
     var onItemClicked: ((Cast) -> Unit)? = null
 
     fun setData(data: List<Cast>) {
+        this.data.clear()
         this.data.addAll(data)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(this.data.size - data.size, data.size)
     }
 
     inner class ViewHolder(private val binding: CelebritiesItemChildBinding) :
@@ -25,6 +26,7 @@ class CastAdapter : RecyclerView.Adapter<CastAdapter.ViewHolder>() {
 
             Glide.with(binding.itemImage).load("https://image.tmdb.org/t/p/w500" + cast.profilePath)
                 .into(binding.itemImage)
+
             binding.itemTitle.text = cast.name
             binding.itemSize.text = cast.character
 
@@ -46,7 +48,6 @@ class CastAdapter : RecyclerView.Adapter<CastAdapter.ViewHolder>() {
         )
 
     }
-
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         holder.binData(data[position])
     }

@@ -1,14 +1,13 @@
 package com.example.movieapp.ui.main.movieDetails
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.View
-import androidx.core.os.bundleOf
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.movieapp.ui.main.seeAllMovies.SeeAllActorActivity
 import com.example.movieapp.ui.main.seeAllMovies.SeeAllMoviesActivity
-import com.example.movieapp.ui.main.trailer.TrailerActivity
 import com.google.android.material.snackbar.Snackbar
 import uz.isystem.tmdbapp.core.adapter.CastAdapter
 import uz.isystem.tmdbapp.core.adapter.SimilarMoviesAdapter
@@ -74,19 +73,15 @@ class MovieDetailsActivity : BaseActivity(), MovieDetailsMVP.View {
 
         videoAdapter.onItemClicked = {
 
-            val bundle = bundleOf(TrailerActivity.KEY_LINK to it.key)
+//            val bundle = bundleOf(TrailerActivity.KEY_LINK to it.key)
+//
+//            val intent = Intent(this, TrailerActivity::class.java)
 
-            val intent = Intent(this, TrailerActivity::class.java)
-
-            intent.putExtras(bundle)
-
+            var intent = Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse("https://www.youtube.com/watch?v=" + it.key)
+            )
             this.startActivity(intent)
-
-            //            Open Youtube
-//            var intent = Intent(
-//                Intent.ACTION_VIEW,
-//                Uri.parse("https://www.youtube.com/watch?v=" + it.key)
-//            )
         }
 
         binding.allButtonSimilar.setOnClickListener {
@@ -102,11 +97,6 @@ class MovieDetailsActivity : BaseActivity(), MovieDetailsMVP.View {
             startActivity(intent)
         }
     }
-
-
-//        binding.favoriteButtom.setOnClickListener {
-//            presenter.markAsFavorite(id)
-//        }
 
     fun similarMoviesClicked() {
 
@@ -154,15 +144,26 @@ class MovieDetailsActivity : BaseActivity(), MovieDetailsMVP.View {
 
     override fun setSimilarMovies(similarMoviesResponse: SimilarMoviesResponse) {
         similarMoviesAdapter.setData(similarMoviesResponse.results)
+        if (similarMoviesResponse.results.isNotEmpty()) {
+            binding.similarText.visibility = View.VISIBLE
+            binding.allButtonSimilar.visibility = View.VISIBLE
+        }
 
     }
 
     override fun setTrailerMovies(movieDetails: MovieTrailerResponse) {
         videoAdapter.setData(movieDetails.results)
+        if (movieDetails.results.isNotEmpty()) {
+            binding.videoText.visibility = View.VISIBLE
+        }
     }
 
     override fun setMovieCast(castResponse: CastResponse) {
         castAdapter.setData(castResponse.cast)
+        if (castResponse.cast.isNotEmpty()) {
+            binding.castCraw.visibility = View.VISIBLE
+            binding.allButtonCast.visibility = View.VISIBLE
+        }
     }
 
 

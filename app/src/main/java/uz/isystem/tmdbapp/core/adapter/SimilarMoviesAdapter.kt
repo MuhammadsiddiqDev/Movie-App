@@ -15,8 +15,9 @@ class SimilarMoviesAdapter : RecyclerView.Adapter<SimilarMoviesAdapter.ViewHolde
 
 
     fun setData(data: List<MovieData>) {
+        this.data.clear()
         this.data.addAll(data)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(this.data.size - data.size, data.size)
     }
 
     inner class ViewHolder(val binding: ItemNowPlayingBinding) :

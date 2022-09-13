@@ -14,8 +14,9 @@ class TrendingPersonAdapter : RecyclerView.Adapter<TrendingPersonAdapter.ViewHol
     var onItemClicked: ((Cast) -> Unit)? = null
 
     fun setData(data: List<Cast>) {
+        this.data.clear()
         this.data.addAll(data)
-        notifyDataSetChanged()
+        notifyItemRangeInserted(this.data.size - data.size, data.size)
     }
 
     inner class ViewHolder(private val binding: ItemCelebritiesTrendingBinding) :

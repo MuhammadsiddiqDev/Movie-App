@@ -17,14 +17,16 @@
         <entry key="app/src/main/res/drawable/shape.xml" value="0.1185" />
         <entry key="app/src/main/res/drawable/shape_background.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/shape_background2.xml" value="0.105" />
+        <entry key="app/src/main/res/drawable/shape_background_details.xml" value="0.1185" />
         <entry key="app/src/main/res/drawable/shape_background_detals.xml" value="0.115" />
+        <entry key="app/src/main/res/drawable/shape_background_photo.xml" value="0.1185" />
         <entry key="app/src/main/res/drawable/shape_button.xml" value="0.1095" />
         <entry key="app/src/main/res/drawable/shape_edges.xml" value="0.115" />
         <entry key="app/src/main/res/drawable/shape_edges2.xml" value="0.105" />
         <entry key="app/src/main/res/layout/Upcoming_item_group.xml" value="0.19166666666666668" />
         <entry key="app/src/main/res/layout/activity_about_actor.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_info.xml" value="0.190625" />
-        <entry key="app/src/main/res/layout/activity_login.xml" value="0.18854166666666666" />
+        <entry key="app/src/main/res/layout/activity_login.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.2" />
         <entry key="app/src/main/res/layout/activity_movie_details.xml" value="0.17" />
         <entry key="app/src/main/res/layout/activity_see_all_movie.xml" value="0.19166666666666668" />
@@ -32,7 +34,7 @@
         <entry key="app/src/main/res/layout/activity_start.xml" value="0.10572916666666667" />
         <entry key="app/src/main/res/layout/activity_trailer.xml" value="0.19166666666666668" />
         <entry key="app/src/main/res/layout/celebrities_item_child.xml" value="0.33" />
-        <entry key="app/src/main/res/layout/celebrities_item_group.xml" value="0.18854166666666666" />
+        <entry key="app/src/main/res/layout/celebrities_item_group.xml" value="0.25" />
         <entry key="app/src/main/res/layout/celebrities_item_more_child.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_apps.xml" value="0.18854166666666666" />
         <entry key="app/src/main/res/layout/fragment_celebrities.xml" value="0.14" />
@@ -41,7 +43,7 @@
         <entry key="app/src/main/res/layout/fragment_info.xml" value="0.22" />
         <entry key="app/src/main/res/layout/fragment_movies.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_search.xml" value="0.15" />
-        <entry key="app/src/main/res/layout/fragment_tmdb.xml" value="0.25" />
+        <entry key="app/src/main/res/layout/fragment_tmdb.xml" value="0.21" />
         <entry key="app/src/main/res/layout/fragment_tv_shows.xml" value="0.15" />
         <entry key="app/src/main/res/layout/home_slider.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_Celebrites.xml" value="0.19166666666666668" />
@@ -68,6 +70,7 @@
         <entry key="app/src/main/res/layout/tv_shows_item_group.xml" value="0.18854166666666666" />
         <entry key="app/src/main/res/layout/upcoming_item_group.xml" value="0.18" />
         <entry key="app/src/main/res/menu/main_bottom_menu.xml" value="0.18854166666666666" />
+        <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.1185" />
       </map>
     </option>
   </component>

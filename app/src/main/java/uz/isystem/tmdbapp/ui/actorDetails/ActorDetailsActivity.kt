@@ -29,17 +29,11 @@ class ActorDetailsActivity : BaseActivity(), ActorDetailsMVP.View {
 
     lateinit var binding: ActivityAboutActorBinding
 
-    private var productionCompanies: String = "Production companies: "
-    lateinit var productionCountries: String
-    var genre: String = "Genre: "
-
     override fun getView(): View? {
         binding = ActivityAboutActorBinding.inflate(layoutInflater)
 
         return binding.root
-
     }
-
     override fun onCreated(savedInstanceState: Bundle?) {
 
         val intent = intent
@@ -50,7 +44,6 @@ class ActorDetailsActivity : BaseActivity(), ActorDetailsMVP.View {
         presenter.loadSimilarMovies(id)
 
         similarMoviesClicked()
-
 
         binding.allButton.setOnClickListener {
             var intent = Intent(this, SeeAllMoviesActivity::class.java)
@@ -78,10 +71,16 @@ class ActorDetailsActivity : BaseActivity(), ActorDetailsMVP.View {
         binding.similarMovies.adapter = actorAdapter
         var layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.similarMovies.layoutManager = layoutManager
+
     }
 
     override fun setSimilarMovies(castSimilarResponse: CastSimilarResponse) {
         actorAdapter.setData(castSimilarResponse.cast)
+        if (castSimilarResponse.cast.isNotEmpty()) {
+            binding.similarText.visibility = View.VISIBLE
+            binding.allButton.visibility = View.VISIBLE
+        }
+
     }
 
     private fun showData(actorDetailResponse: ActorDetailResponse) {
@@ -104,7 +103,6 @@ class ActorDetailsActivity : BaseActivity(), ActorDetailsMVP.View {
     }
 
     override fun setActorDetails(actorDetailsResponse: ActorDetailResponse) {
-
         binding.progressBar.visibility = View.GONE
         data = actorDetailsResponse
         showData(data)

@@ -14,8 +14,9 @@ class SeeAllMoviesAdapter : RecyclerView.Adapter<SeeAllMoviesAdapter.ViewHolder>
     var onItemClicked: ((MovieData) -> Unit)? = null
 
     fun setData(data: List<MovieData>) {
+        this.data.clear()
         this.data.addAll(data)
-        notifyItemRangeChanged(data.size, data.size - 1)
+        notifyItemRangeInserted(this.data.size - data.size, data.size)
     }
 
 
