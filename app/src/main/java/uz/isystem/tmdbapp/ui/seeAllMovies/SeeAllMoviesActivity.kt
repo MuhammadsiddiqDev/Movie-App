@@ -57,7 +57,7 @@ class SeeAllMoviesActivity : BaseActivity(), SeeAllMoviesMVP.View {
             "Similar Movies" -> {
                 presenter.loadSimilarMovies(id)
             }
-            "Similar Movies Actor" -> {
+            "Movies of the actor" -> {
                 presenter.loadSimilarActor(id)
             }
             else -> {

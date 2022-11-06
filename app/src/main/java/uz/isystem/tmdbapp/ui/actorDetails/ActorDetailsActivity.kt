@@ -47,7 +47,7 @@ class ActorDetailsActivity : BaseActivity(), ActorDetailsMVP.View {
 
         binding.allButton.setOnClickListener {
             var intent = Intent(this, SeeAllMoviesActivity::class.java)
-            intent.putExtra(MOVIE_TYPE, "Similar Movies Actor")
+            intent.putExtra(MOVIE_TYPE, "Movies of the actor")
             intent.putExtra(MovieDetailsActivity.MOVIE_DATA, id)
             startActivity(intent)
         }
