@@ -1,4 +1,4 @@
-package uz.isystem.tmdbapp.ui.accountTmdb
+package uz.isystem.tmdbapp.ui.accountTmdb.other
 
 import android.content.Intent
 import android.net.Uri
@@ -18,7 +18,7 @@ class FragmentContact : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentContactBinding.inflate(inflater, container, false)
         return binding!!.root
     }

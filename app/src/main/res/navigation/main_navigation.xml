@@ -22,12 +22,12 @@
     </fragment>
     <fragment
         android:id="@+id/celebritiesFragment"
-        android:name="com.example.movieapp.ui.main.home.searchFragment.CelebritiesFragment"
+        android:name="uz.isystem.tmdbapp.ui.celebritiesFragment.CelebritiesFragment"
         android:label="CelebritiesFragment"
         tools:layout="@layout/fragment_celebrities" />
     <fragment
         android:id="@+id/searchFragment"
-        android:name="com.example.movieapp.ui.main.home.searchFragment.SearchFragment"
+        android:name="uz.isystem.tmdbapp.ui.searchFragment.SearchFragment"
         android:label="SearchFragment"
         tools:layout="@layout/fragment_search" />
     <fragment
@@ -44,22 +44,32 @@
         <action
             android:id="@+id/action_TMDBFragment_to_FragmentFavorite"
             app:destination="@id/FragmentFavorite" />
+        <action
+            android:id="@+id/action_TMDBFragment_to_fragmentLanguage"
+            app:destination="@id/fragmentLanguage" />
     </fragment>
     <fragment
         android:id="@+id/FragmentInfo"
-        android:name="uz.isystem.tmdbapp.ui.accountTmdb.FragmentInfoApp"
+        android:name="uz.isystem.tmdbapp.ui.accountTmdb.other.FragmentInfoApp"
         android:label="FragmentInfo"
-        tools:layout="@layout/fragment_info"></fragment>
+        tools:layout="@layout/fragment_info">
+
+    </fragment>
 
     <fragment
         android:id="@+id/FragmentContact"
-        android:name="uz.isystem.tmdbapp.ui.accountTmdb.FragmentContact"
+        android:name="uz.isystem.tmdbapp.ui.accountTmdb.other.FragmentContact"
         android:label="FragmentContact"
         tools:layout="@layout/fragment_contact" />
 
     <fragment
         android:id="@+id/FragmentFavorite"
-        android:name="uz.isystem.tmdbapp.ui.accountTmdb.FragmentFavorite"
+        android:name="uz.isystem.tmdbapp.ui.accountTmdb.saved.FragmentSaved"
         android:label="FragmentFavorite"
-        tools:layout="@layout/fragment_favourit" />
+        tools:layout="@layout/fragment_saved" />
+    <fragment
+        android:id="@+id/fragmentLanguage"
+        android:name="uz.isystem.tmdbapp.ui.accountTmdb.other.FragmentLanguage"
+        android:label="FragmentLanguage"
+        tools:layout="@layout/fragment_language" />
 </navigation>

@@ -52,8 +52,8 @@ data class MovieDetailsResponse(
     val title: String, // Fight Club
     @SerializedName("video")
     val video: Boolean, // false
-//    @SerializedName("vote_average")
-//    val voteAverage: Double, // 7.8
+    @SerializedName("vote_average")
+    val voteAverage: Double, // 7.8
     @SerializedName("vote_count")
     val voteCount: Int // 3439
 )

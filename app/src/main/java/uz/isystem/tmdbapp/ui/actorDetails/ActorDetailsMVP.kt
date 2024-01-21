@@ -19,9 +19,9 @@ interface ActorDetailsMVP {
 
         fun cancelRequest()
 
-        fun loadActorDetails(movieId: Int)
+        fun loadActorDetails(movieId: Int, language: String)
 
-        fun loadSimilarMovies(movieId: Int)
+        fun loadSimilarMovies(movieId: Int, language: String)
 
 
     }

@@ -7,6 +7,7 @@ import android.text.method.LinkMovementMethod
 import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.core.view.isVisible
+import uz.isystem.tmdbapp.R
 import uz.isystem.tmdbapp.core.cache.AppCache
 import uz.isystem.tmdbapp.core.models.response.login.acountDetail.AccountDetailResponse
 import uz.isystem.tmdbapp.core.models.response.login.createRequestToken.CreateRequestTokenResponse
@@ -25,7 +26,9 @@ class LoginActivity : BaseActivity(), LoginMVP.View {
 
     private lateinit var presenter: LoginMVP.Presenter
 
-    override fun getView(): View? {
+    private var language = AppCache.appCache?.getLanguage().toString()
+
+    override fun getView(): View {
         _binding = ActivityLoginBinding.inflate(layoutInflater)
         return binding.root
     }
@@ -37,13 +40,15 @@ class LoginActivity : BaseActivity(), LoginMVP.View {
             val browserIntent =
                 Intent(
                     Intent.ACTION_VIEW,
-                    Uri.parse("https://www.themoviedb.org/signup?language=ru")
+                    Uri.parse("https://www.themoviedb.org/signup?language=$language")
                 )
             startActivity(browserIntent)
         }
 
         binding.singIn.setOnClickListener {
             binding.progressBar.visibility = View.VISIBLE
+
+            binding.singIn.text = "Loading..."
 
             binding.editPassword.isVisible
             binding.editUserName.isVisible
@@ -81,17 +86,20 @@ class LoginActivity : BaseActivity(), LoginMVP.View {
     }
 
     override fun createSession(sessionId: String) {
-        presenter.getAccountDetail()
-    }
-
-    override fun accountDetail(accountDetail: AccountDetailResponse) {
         AppCache.appCache!!.setFirstOpen(false)
+
         val startIntent = Intent(this, MainActivity::class.java)
         startActivity(startIntent)
         finish()
     }
 
+    override fun accountDetail(accountDetail: AccountDetailResponse) {
+
+    }
+
     override fun onError(message: String?) {
+
+        binding.singIn.text = String.format(this.resources.getString(R.string.sing_in))
 
         binding.progressBar.visibility = View.INVISIBLE
         binding.editPassword.visibility

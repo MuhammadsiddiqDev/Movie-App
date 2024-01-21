@@ -1,4 +1,4 @@
-package uz.isystem.tmdbapp.core.models.response.main.home.search
+package uz.isystem.tmdbapp.core.models.response.main.home.search.movie
 
 
 import androidx.annotation.Keep

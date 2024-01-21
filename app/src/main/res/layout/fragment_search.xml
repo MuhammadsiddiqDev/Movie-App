@@ -6,51 +6,45 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
-    <LinearLayout
-        android:id="@+id/layout_editor"
+    <EditText
+        android:id="@+id/edit_text"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="7"
-        app:layout_constraintTop_toTopOf="parent">
+        android:layout_height="45dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="60dp"
+        android:layout_weight="6"
+        android:background="@drawable/shape_edges4"
+        android:hint="Search"
+        android:imeOptions="actionDone"
+        android:inputType="text"
+        android:padding="6dp"
+        android:paddingStart="8dp"
+        android:textColor="@color/white"
+        android:textColorHint="#B2B3B6"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <EditText
-            android:id="@+id/edit_text"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginStart="8dp"
-            android:imeOptions="actionDone"
-            android:inputType="text"
-            android:layout_marginTop="14dp"
-            android:layout_weight="6"
-            android:background="@drawable/shape_edges"
-            android:padding="6dp"
-            android:paddingStart="8dp"
-            android:textColor="@color/white"
-            android:textSize="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <ImageView
-            android:id="@+id/search_button"
-            android:layout_width="0dp"
-            android:layout_height="50dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="6dp"
-            android:layout_weight="1"
-            android:clickable="true"
-            android:focusable="true"
-            android:src="@drawable/ic_round_search_24"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-    </LinearLayout>
-
+    <ImageView
+        android:id="@+id/search_button"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_marginTop="14dp"
+        android:layout_marginEnd="6dp"
+        android:layout_weight="1"
+        android:background="@drawable/shape_county"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="10dp"
+        android:src="@drawable/ic_round_search_24"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/search_icon"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:background="@drawable/ic_round_search_24"
         android:clickable="true"
         android:gravity="center"
@@ -65,9 +59,9 @@
         android:id="@+id/search_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Search Any Movie"
+        android:text="@string/search_any_movie"
         android:textColor="@color/white"
-        android:textSize="25dp"
+        android:textSize="18dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/search_icon" />
@@ -75,8 +69,8 @@
 
     <ImageView
         android:id="@+id/not_found_image"
-        android:layout_width="200dp"
-        android:layout_height="200dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         android:layout_marginBottom="10dp"
         android:src="@drawable/ic_round_search_off_24"
         android:visibility="invisible"
@@ -89,9 +83,9 @@
         android:id="@+id/not_found_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Not Found"
+        android:text="@string/not_found"
         android:textColor="@color/white"
-        android:textSize="25dp"
+        android:textSize="18dp"
         android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -101,16 +95,30 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/search_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="90dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
         android:clickable="true"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/layout_editor"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text"
         tools:itemCount="5"
         tools:listitem="@layout/item_see_all" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/search_actor_recyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_marginTop="10dp"
+        android:clickable="true"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/edit_text"
+        tools:itemCount="5"
+        tools:listitem="@layout/item_see_all_celebrities" />
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -122,5 +130,111 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_paging"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/green"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/not_internet_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/nointernet"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <TextView
+        android:id="@+id/not_internet_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="@string/please_check_the_internet"
+        android:textColor="#5E5C59"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/not_internet_image" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="35dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/shape_edges4"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <TextView
+            android:id="@+id/movie1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/movies"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@id/actor1"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/actor1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="@string/actors"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/movie1" />
+
+        <TextView
+            android:id="@+id/movie2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginStart="2dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#4CAF50"
+            android:gravity="center"
+            android:paddingEnd="2dp"
+            android:text="@string/movies"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:visibility="visible"
+            app:layout_constraintEnd_toStartOf="@id/actor2"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <TextView
+            android:id="@+id/actor2"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginTop="2dp"
+            android:layout_marginEnd="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="#4CAF50"
+            android:gravity="center"
+            android:paddingStart="2dp"
+            android:text="@string/actors"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/movie2" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

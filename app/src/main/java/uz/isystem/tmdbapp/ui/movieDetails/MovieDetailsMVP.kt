@@ -1,9 +1,10 @@
-package com.example.movieapp.ui.main.movieDetails
+package uz.isystem.tmdbapp.ui.movieDetails
 
 import uz.isystem.tmdbapp.core.models.response.main.home.cast.CastResponse
 import uz.isystem.tmdbapp.core.models.response.main.home.movieData.movieDetails.MovieDetailsResponse
 import uz.isystem.tmdbapp.core.models.response.main.home.movieData.movieTrailer.MovieTrailerResponse
 import uz.isystem.tmdbapp.core.models.response.main.home.similarMovies.SimilarMoviesResponse
+import uz.isystem.tmdbapp.core.models.response.main.home.watch.AddWatchResponse
 
 interface MovieDetailsMVP {
 
@@ -17,6 +18,8 @@ interface MovieDetailsMVP {
 
         fun setTrailerMovies(movieTrailerResponse: MovieTrailerResponse)
 
+        fun getAddSaved(addWatchResponse: AddWatchResponse)
+
         fun getFavoriteResult(success: Boolean)
 
         fun onError(message: String)
@@ -27,15 +30,17 @@ interface MovieDetailsMVP {
 
         fun cancelRequest()
 
-        fun loadMovieDetails(movieId: Int)
+        fun addSaved(add: Boolean, movieId: Int)
 
-        fun loadMovieCast(movieId: Int)
+        fun loadMovieDetails(movieId: Int, language: String)
 
-        fun loadSimilarMovies(movieId: Int)
+        fun loadMovieCast(movieId: Int, language: String)
 
-        fun loadMovieTrailer(movieId: Int)
+        fun loadSimilarMovies(movieId: Int, language: String)
 
-        fun markAsFavorite(movieId: Int)
+        fun loadMovieTrailer(movieId: Int, language: String)
+
+        fun markAsFavorite(movieId: Int, language: String)
 
     }
 

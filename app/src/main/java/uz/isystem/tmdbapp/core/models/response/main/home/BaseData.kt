@@ -1,4 +1,4 @@
-package uz.isystem.tmdbapp.ui.main.home
+package uz.isystem.tmdbapp.core.models.response.main.home
 
 abstract class BaseData {
 

@@ -1,6 +1,57 @@
 <resources>
     <string name="app_name">TMDB App</string>
-    <string name="link_click">
-        <ul><il><a href="https://www.themoviedb.org/signup?language=ru">SIGN UP</a></il></ul>
-    </string>
+    <string name="saved">Saved</string>
+    <string name="language">Language</string>
+    <string name="about">About app</string>
+    <string name="log_out">Log out</string>
+    <string name="log_in">Log in</string>
+    <string name="profile">Profile</string>
+    <string name="birthplace">Birthplace</string>
+    <string name="production_companies">Production companies:</string>
+    <string name="overview">"overview:  "</string>
+    <string name="username">" Username"</string>
+    <string name="password">" Password"</string>
+    <string name="sing_in">SIGN IN</string>
+    <string name="don_t_have_an_account">"Don't have an account ? "</string>
+    <string name="sign_up">SIGN UP</string>
+    <string name="continuee">Continue</string>
+    <string name="celebrities">Celebrities</string>
+    <string name="popular">Popular</string>
+    <string name="see_all">see all</string>
+    <string name="trending">Trending</string>
+    <string name="about_me">This application is created by Muhammadsiddiq, Android Developer. All information is taken from the themoviedb.org website. Your account data is also stored on the themoviedb.org website. If you face any problems while using this application, you can contact me via email, telegram, Linkedin or Instagram. Thank you for choosing this application</string>
+    <string name="connection">connection</string>
+    <string name="contact">Contact</string>
+    <string name="not_saved">You have no saved movies yet</string>
+    <string name="my_saved">My saved</string>
+    <string name="info_about_app">Information about the TMDB site\n\n The Movie Database (TMDB) is a community built movie and TV database. Every piece of data has been added by our amazing community dating back to 2008. TMDb\'s strong international focus and breadth of data is largely unmatched and something we\'re incredibly proud of. Put simply, we live and breathe community and that\'s precisely what makes us different. The TMDB Advantage \n\n 1\n Every year since 2008, the number of contributions to our database has increased. With over 400,000 developers and companies using our platform, TMDB has become a premiere source for metadata. \n\n 2\n Along with extensive metadata for movies, TV shows and people, we also offer one of the best selections of high resolution posters and fanart. On average, over 1,000 images are added every single day. \n\n 3\n We\'re international. While we officially support 39 languages we also have extensive regional data. Every single day TMDB is used in over 180 countries. \n\n 4\n Our community is second to none. Between our staff and community moderators, we\'re always here to help. We\'re passionate about making sure your experience on TMDB is nothing short of amazing. \n\n 5\n Trusted platform. Every single day our service is used by millions of people while we process over 3 billion requests. We\'ve proven for years that this is a service that can be trusted and relied on.</string>
+    <string name="movies">Movies</string>
+    <string name="search_any_movie">Search Any Movie</string>
+    <string name="search_any_actor">Search Any Actor</string>
+    <string name="not_found">Not Found</string>
+    <string name="now_playing">Now playing</string>
+    <string name="top_rated">Top Rated</string>
+    <string name="upcoming">Upcoming</string>
+    <string name="search">Search</string>
+    <string name="release_date">Release date:</string>
+    <string name="revenue">Revenue:</string>
+    <string name="budget">Budget</string>
+    <string name="lenguage">Language: </string>
+    <string name="production_country">Country </string>
+    <string name="production_countries">Production countries: </string>
+    <string name="genre">Genre: </string>
+    <string name="popularity">Popularity</string>
+    <string name="similar_movies">Similar Movies</string>
+    <string name="video">Video</string>
+    <string name="actors">Actors</string>
+    <string name="known_for">known for</string>
+    <string name="please_check_the_internet">Please check the internet and try again</string>
+    <string name="no">No</string>
+    <string name="yes">Yes</string>
+    <string name="sign_out_of_the_account">Sign out of the account</string>
+    <string name="movies_of_the_actor">Movies of the actor</string>
+    <string name="if_you_want_to_leave_the_profile">If you want to leave the profile, click Yes, if you don\'t want to leave, click No</string>
+    <string name="biography">Biography</string>
+    <string name="the_search_field_is_empty">The search field is empty!!</string>
+
 </resources>

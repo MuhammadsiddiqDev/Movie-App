@@ -10,13 +10,13 @@
     <TextView
         android:id="@+id/movie_type"
         android:layout_width="match_parent"
-        android:layout_height="?actionBarSize"
-        android:background="@drawable/shape_edges"
+        android:layout_height="48dp"
+        android:background="@drawable/shape_edges4"
         android:gravity="center"
         tools:text="Movie Type"
         android:textColor="@color/white"
-        android:textSize="24sp"
-        android:textStyle="bold"
+        android:textSize="20sp"
+        android:textStyle="normal"
         app:layout_constraintBottom_toTopOf="@id/recycler_view"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -41,5 +41,15 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ProgressBar
+        android:id="@+id/progress_bar_paging"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminateTint="@color/green"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

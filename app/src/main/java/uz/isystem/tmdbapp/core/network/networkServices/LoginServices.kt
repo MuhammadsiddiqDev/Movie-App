@@ -17,7 +17,6 @@ interface LoginServices {
     @GET("/3/authentication/token/new")
     fun createRequestToken(@Query("api_key") apiKey: String): Single<Response<CreateRequestTokenResponse?>>
 
-
     //  2
     @POST("/3/authentication/token/validate_with_login")
     fun createSessionWithLogin(

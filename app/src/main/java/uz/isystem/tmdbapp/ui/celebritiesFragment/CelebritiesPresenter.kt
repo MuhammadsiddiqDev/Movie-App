@@ -1,5 +1,6 @@
-package com.example.movieapp.ui.main.home.searchFragment
+package uz.isystem.tmdbapp.ui.celebritiesFragment
 
+import com.example.movieapp.ui.main.home.searchFragment.CelebritiesMVP
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
@@ -15,8 +16,12 @@ class CelebritiesPresenter(val view: CelebritiesMVP.View) : CelebritiesMVP.Prese
     var actorDataServices: ActorDataServices = ApiClientModule.getActorData()
     var compositeDisposable = CompositeDisposable()
 
-    override fun loadCelebritiesCast() {
-        var disposable = actorDataServices.getPersonPopular(apiKey = BuildConfig.apiKey, page = 1)
+    override fun loadCelebritiesCast(language: String) {
+        var disposable = actorDataServices.getPersonPopular(
+            apiKey = BuildConfig.apiKey,
+            page = 1,
+            language = language
+        )
             .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribeWith(
                 object : DisposableSingleObserver<Response<PeoplePopularResponse?>>() {
                     override fun onSuccess(t: Response<PeoplePopularResponse?>) {
@@ -37,13 +42,14 @@ class CelebritiesPresenter(val view: CelebritiesMVP.View) : CelebritiesMVP.Prese
         compositeDisposable.add(disposable)
     }
 
-    override fun loadCelebritiesTrending() {
+    override fun loadCelebritiesTrending(language: String) {
 
         var disposable = actorDataServices.getTrendingPerson(
             apiKey = BuildConfig.apiKey,
             media_type = "person",
             time_window = "day",
-            page = 1
+            page = 1,
+            language = language
         )
             .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribeWith(
                 object : DisposableSingleObserver<Response<PeoplePopularResponse?>>() {

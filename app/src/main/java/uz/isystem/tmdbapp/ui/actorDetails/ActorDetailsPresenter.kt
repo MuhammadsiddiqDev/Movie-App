@@ -16,9 +16,13 @@ class ActorDetailsPresenter(val view: ActorDetailsMVP.View) : ActorDetailsMVP.Pr
     var actorDataServices: ActorDataServices = ApiClientModule.getActorData()
 
 
-    override fun loadActorDetails(movieId: Int) {
+    override fun loadActorDetails(movieId: Int, language: String) {
         var disposable =
-            actorDataServices.getActorDetails(apiKey = ApiClientModule.apiKey, movieId = movieId)
+            actorDataServices.getActorDetails(
+                apiKey = ApiClientModule.apiKey,
+                movieId = movieId,
+                language = language
+            )
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(object :
@@ -41,10 +45,11 @@ class ActorDetailsPresenter(val view: ActorDetailsMVP.View) : ActorDetailsMVP.Pr
 
     }
 
-    override fun loadSimilarMovies(movieId: Int) {
+    override fun loadSimilarMovies(movieId: Int, language: String) {
         var disposable = actorDataServices.getSimilarMovies(
             movieId = movieId,
             apiKey = ApiClientModule.apiKey,
+            language = language
         ).observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribeWith(object : DisposableSingleObserver<Response<CastSimilarResponse?>>() {

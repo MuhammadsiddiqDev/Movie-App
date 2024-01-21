@@ -1,9 +1,11 @@
 package uz.isystem.tmdbapp.core.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import uz.isystem.tmdbapp.R
 import uz.isystem.tmdbapp.core.models.response.main.home.nowPlayingMovie.MovieData
 import uz.isystem.tmdbapp.databinding.ItemNowPlayingBinding
 
@@ -13,6 +15,7 @@ class SimilarMoviesAdapter : RecyclerView.Adapter<SimilarMoviesAdapter.ViewHolde
 
     var onItemClicked: ((MovieData) -> Unit)? = null
 
+    var mycon: Context? = null
 
     fun setData(data: List<MovieData>) {
         this.data.clear()
@@ -23,12 +26,20 @@ class SimilarMoviesAdapter : RecyclerView.Adapter<SimilarMoviesAdapter.ViewHolde
     inner class ViewHolder(val binding: ItemNowPlayingBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(similarMovieData: MovieData) {
-            Glide.with(binding.imageGroup)
-                .load("https://image.tmdb.org/t/p/w500" + similarMovieData.posterPath)
-                .into(binding.itemImage)
+
+            if (similarMovieData.posterPath == null) {
+                Glide.with(binding.itemImage)
+                    .load(R.drawable.not_found)
+                    .into(binding.itemImage)
+            } else {
+                Glide.with(binding.imageGroup)
+                    .load("https://image.tmdb.org/t/p/w500" + similarMovieData.posterPath)
+                    .into(binding.itemImage)
+            }
 
             binding.itemTitle.text = similarMovieData.title
-            binding.itemSize.text = "popularity ${similarMovieData.popularity}"
+            binding.itemSize.text =
+                "${String.format(mycon!!.getString(R.string.popularity))} ${similarMovieData.popularity}"
 
             binding.root.setOnClickListener {
                 onItemClicked?.invoke(similarMovieData)
@@ -38,6 +49,7 @@ class SimilarMoviesAdapter : RecyclerView.Adapter<SimilarMoviesAdapter.ViewHolde
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        mycon = parent.context
         return ViewHolder(
             ItemNowPlayingBinding.inflate(
                 LayoutInflater.from(parent.context),

@@ -1,5 +1,7 @@
 package uz.isystem.tmdbapp.ui.main.home
 
+import uz.isystem.tmdbapp.core.models.response.main.home.BaseData
+
 interface HomeMVP {
     interface View {
         fun isLoading(isLoading: Boolean)
@@ -14,15 +16,15 @@ interface HomeMVP {
 
     interface Presenter {
 
-        fun loadSliderData()
+        fun loadSliderData(language: String)
 
-        fun loadTopRated()
+        fun loadTopRated(language: String)
 
-        fun loadPopular()
+        fun loadPopular(language: String)
 
-        fun loadNowPlaying()
+        fun loadNowPlaying(language: String)
 
-        fun loadUpcomingData()
+        fun loadUpcomingData(language: String)
 
         fun cancelRequest()
     }

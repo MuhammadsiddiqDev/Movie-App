@@ -1,5 +1,6 @@
-package com.example.movieapp.ui.main.seeAllMovies
+package uz.isystem.tmdbapp.ui.seeAllMovies
 
+import com.example.movieapp.ui.main.seeAllMovies.SeeAllMoviesMVP
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
@@ -21,65 +22,94 @@ class SeeAllMoviesPresenter(val view: SeeAllMoviesMVP.View) : SeeAllMoviesMVP.Pr
     var actorDataServices: ActorDataServices = ApiClientModule.getActorData()
     var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
-    override fun loadPopularMovies() {
-        var disposable = movieServer.getPopularMovies(ApiClientModule.apiKey, 2)
-            .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribeWith(
-                object : DisposableSingleObserver<Response<PopularResponse?>>() {
-                    override fun onSuccess(t: Response<PopularResponse?>) {
-                        if (t.isSuccessful) {
-                            t.body()?.let {
-                                view.setPopularMovies(it)
+    override fun loadPopularMovies(language: String, page: Int) {
+        var disposable =
+            movieServer.getPopularMovies(ApiClientModule.apiKey, page, language = language)
+                .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+                .subscribeWith(
+                    object : DisposableSingleObserver<Response<PopularResponse?>>() {
+                        override fun onSuccess(t: Response<PopularResponse?>) {
+                            if (t.isSuccessful) {
+                                t.body()?.let {
+                                    view.setPopularMovies(it)
+                                }
+                            } else {
+                                view.onError(t.message().toString())
                             }
-                        } else {
-                            view.onError(t.message().toString())
                         }
-                    }
 
-                    override fun onError(e: Throwable) {
-                        view.onError(e.message.toString())
-                    }
+                        override fun onError(e: Throwable) {
+                            view.onError(e.message.toString())
+                        }
 
-                })
+                    })
         compositeDisposable.add(disposable)
     }
 
-    override fun loadNowPlayingMovies() {
-        val disposable = movieServer.getNowPlayingMovies(ApiClientModule.apiKey, 1)
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribeOn(Schedulers.io())
-            .subscribeWith(object :
-                DisposableSingleObserver<Response<NowPlayingResponse?>>() {
-                override fun onSuccess(t: Response<NowPlayingResponse?>) {
-                    if (t.isSuccessful) {
-                        t.body()?.let {
-                            view.setNowPlayingMovies(it)
-                        }
-                    } else {
+    override fun loadNowPlayingMovies(language: String, page: Int) {
+        val disposable =
+            movieServer.getNowPlayingMovies(ApiClientModule.apiKey, page, language = language)
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribeOn(Schedulers.io())
+                .subscribeWith(object :
+                    DisposableSingleObserver<Response<NowPlayingResponse?>>() {
+                    override fun onSuccess(t: Response<NowPlayingResponse?>) {
+                        if (t.isSuccessful) {
+                            t.body()?.let {
+                                view.setNowPlayingMovies(it)
+                            }
+                        } else {
                         view.onError(t.message())
                     }
                 }
 
-                override fun onError(e: Throwable) {
-                    view.onError(e.message.toString())
-                }
+                    override fun onError(e: Throwable) {
+                        view.onError(e.message.toString())
+                    }
 
-            })
+                })
 
         compositeDisposable.add(disposable)
     }
 
-    override fun loadTopRatedMovies() {
-        var disposable = movieServer.getTopRatedMovies(ApiClientModule.apiKey, 1)
-            .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribeWith(
-                object : DisposableSingleObserver<Response<TopRatedResponse?>>() {
-                    override fun onSuccess(t: Response<TopRatedResponse?>) {
-                        if (t.isSuccessful) {
-                            t.body()?.let {
-                                view.setTopRatedMovies(it)
+    override fun loadTopRatedMovies(language: String, page: Int) {
+        var disposable =
+            movieServer.getTopRatedMovies(ApiClientModule.apiKey, page, language = language)
+                .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+                .subscribeWith(
+                    object : DisposableSingleObserver<Response<TopRatedResponse?>>() {
+                        override fun onSuccess(t: Response<TopRatedResponse?>) {
+                            if (t.isSuccessful) {
+                                t.body()?.let {
+                                    view.setTopRatedMovies(it)
+                                }
+                            } else {
+                                view.onError(t.message().toString())
                             }
-                        } else {
-                            view.onError(t.message().toString())
                         }
+
+                        override fun onError(e: Throwable) {
+                            view.onError(e.message.toString())
+                        }
+
+                    })
+        compositeDisposable.add(disposable)
+    }
+
+    override fun loadUpcomingMovies(language: String, page: Int) {
+        var disposable =
+            movieServer.getUpcomingMovies(ApiClientModule.apiKey, page, language = language)
+                .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
+                .subscribeWith(
+                    object : DisposableSingleObserver<Response<UpcomingResponse?>>() {
+                        override fun onSuccess(t: Response<UpcomingResponse?>) {
+                            if (t.isSuccessful) {
+                                t.body()?.let {
+                                    view.setUpcomingMovies(it)
+                                }
+                            } else {
+                                view.onError(t.message().toString())
+                            }
                     }
 
                     override fun onError(e: Throwable) {
@@ -90,33 +120,12 @@ class SeeAllMoviesPresenter(val view: SeeAllMoviesMVP.View) : SeeAllMoviesMVP.Pr
         compositeDisposable.add(disposable)
     }
 
-    override fun loadUpcomingMovies() {
-        var disposable = movieServer.getUpcomingMovies(ApiClientModule.apiKey, 1)
-            .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribeWith(
-                object : DisposableSingleObserver<Response<UpcomingResponse?>>() {
-                    override fun onSuccess(t: Response<UpcomingResponse?>) {
-                        if (t.isSuccessful) {
-                            t.body()?.let {
-                                view.setUpcomingMovies(it)
-                            }
-                        } else {
-                            view.onError(t.message().toString())
-                        }
-                    }
-
-                    override fun onError(e: Throwable) {
-                        view.onError(e.message.toString())
-                    }
-
-                })
-        compositeDisposable.add(disposable)
-    }
-
-    override fun loadSimilarMovies(movieId: Int) {
+    override fun loadSimilarMovies(movieId: Int, language: String, page: Int) {
         var disposable = movieServerDetails.getSimilarMovies(
             apiKey = ApiClientModule.apiKey,
-            page = 1,
-            movieId = movieId
+            page = page,
+            movieId = movieId,
+            language = language
         )
             .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribeWith(
                 object : DisposableSingleObserver<Response<SimilarMoviesResponse?>>() {
@@ -139,10 +148,11 @@ class SeeAllMoviesPresenter(val view: SeeAllMoviesMVP.View) : SeeAllMoviesMVP.Pr
     }
 
 
-    override fun loadSimilarActor(movieId: Int) {
+    override fun loadSimilarActor(movieId: Int, language: String) {
         var disposable = actorDataServices.getSimilarMovies(
             movieId = movieId,
             apiKey = ApiClientModule.apiKey,
+            language = language
         ).observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribeWith(object : DisposableSingleObserver<Response<CastSimilarResponse?>>() {

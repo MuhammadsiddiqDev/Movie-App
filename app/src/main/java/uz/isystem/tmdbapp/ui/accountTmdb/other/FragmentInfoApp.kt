@@ -1,4 +1,4 @@
-package uz.isystem.tmdbapp.ui.accountTmdb
+package uz.isystem.tmdbapp.ui.accountTmdb.other
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -17,7 +17,7 @@ class FragmentInfoApp : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentInfoBinding.inflate(inflater, container, false)
         return binding!!.root
     }

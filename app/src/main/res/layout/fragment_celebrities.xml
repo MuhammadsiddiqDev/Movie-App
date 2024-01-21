@@ -6,39 +6,41 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/top_content"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/shape_edges4"
+        android:padding="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="20dp"
+            android:text="@string/celebrities"
+            android:textColor="@color/white"
+            android:textSize="22sp"
+            android:textStyle="bold"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:fillViewport="true">
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/top_content">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/top_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="@drawable/shape_edges"
-                android:padding="10dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="20dp"
-                    android:layout_marginEnd="20dp"
-                    android:text="Celebrities"
-                    android:textColor="@color/white"
-                    android:textSize="25sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
                 android:id="@+id/popular_title"
@@ -48,11 +50,11 @@
                 android:layout_marginTop="15dp"
                 android:visibility="invisible"
                 android:fontFamily="sans-serif-medium"
-                android:text="Popular"
+                android:text="@string/popular"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/top_content" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <LinearLayout
                 android:id="@+id/all_button_popular"
@@ -63,7 +65,7 @@
                 android:focusable="true"
                 android:visibility="invisible"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/top_content">
+                app:layout_constraintTop_toTopOf="parent">
 
 
                 <TextView
@@ -71,7 +73,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:padding="8dp"
-                    android:text="see all"
+                    android:text="@string/see_all"
                     android:textColor="@color/green" />
 
                 <ImageButton
@@ -124,7 +126,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="20dp"
                 android:fontFamily="sans-serif-medium"
-                android:text="Trending"
+                android:text="@string/trending"
                 android:visibility="invisible"
                 android:textColor="@color/white"
                 android:textSize="18sp"
@@ -135,7 +137,7 @@
                 android:id="@+id/all_button_trending"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="13dp"
+                android:layout_marginTop="10dp"
                 android:clickable="true"
                 android:focusable="true"
                 android:visibility="invisible"
@@ -148,7 +150,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:padding="8dp"
-                    android:text="see all"
+                    android:text="@string/see_all"
                     android:textColor="@color/green" />
 
                 <ImageButton
@@ -193,5 +195,29 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageView
+        android:id="@+id/not_internet_image"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:src="@drawable/nointernet"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"></ImageView>
+
+    <TextView
+        android:id="@+id/not_internet_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="30dp"
+        android:text="@string/please_check_the_internet"
+        android:textColor="#5E5C59"
+        android:textSize="18sp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/not_internet_image" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

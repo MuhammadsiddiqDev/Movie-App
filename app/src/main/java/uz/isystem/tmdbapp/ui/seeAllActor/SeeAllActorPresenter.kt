@@ -1,5 +1,6 @@
-package com.example.movieapp.ui.main.seeAllMovies
+package uz.isystem.tmdbapp.ui.seeAllActor
 
+import com.example.movieapp.ui.main.seeAllMovies.SeeAllActorMVP
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
@@ -18,8 +19,12 @@ class SeeAllActorPresenter(val view: SeeAllActorMVP.View) : SeeAllActorMVP.Prese
     var compositeDisposable: CompositeDisposable = CompositeDisposable()
 
 
-    override fun loadActorDetailSimilar(movieId: Int) {
-        var disposable = actorCast.getCast(apiKey = ApiClientModule.apiKey, movieId = movieId)
+    override fun loadActorDetailSimilar(movieId: Int, language: String) {
+        var disposable = actorCast.getCast(
+            apiKey = ApiClientModule.apiKey,
+            movieId = movieId,
+            language = language
+        )
             .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribeWith(
                 object : DisposableSingleObserver<Response<CastResponse?>>() {
                     override fun onSuccess(t: Response<CastResponse?>) {
@@ -40,9 +45,13 @@ class SeeAllActorPresenter(val view: SeeAllActorMVP.View) : SeeAllActorMVP.Prese
         compositeDisposable.add(disposable)
     }
 
-    override fun loadActorPopular() {
+    override fun loadActorPopular(language: String, page: Int) {
         var disposable =
-            actorDataServices.getPersonPopular(apiKey = ApiClientModule.apiKey, page = 1)
+            actorDataServices.getPersonPopular(
+                apiKey = ApiClientModule.apiKey,
+                page = page,
+                language = language
+            )
                 .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io())
                 .subscribeWith(
                     object : DisposableSingleObserver<Response<PeoplePopularResponse?>>() {
@@ -65,12 +74,13 @@ class SeeAllActorPresenter(val view: SeeAllActorMVP.View) : SeeAllActorMVP.Prese
     }
 
 
-    override fun loadActorTrending() {
+    override fun loadActorTrending(language: String, page: Int) {
         var disposable = actorDataServices.getTrendingPerson(
             apiKey = ApiClientModule.apiKey,
             media_type = "person",
             time_window = "day",
-            page = 1
+            page = page,
+            language = language
         ).observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribeWith(object : DisposableSingleObserver<Response<PeoplePopularResponse?>>() {

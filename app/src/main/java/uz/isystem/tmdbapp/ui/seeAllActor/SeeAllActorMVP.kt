@@ -15,9 +15,9 @@ interface SeeAllActorMVP {
 
     interface Presenter {
 
-        fun loadActorTrending()
-        fun loadActorPopular()
-        fun loadActorDetailSimilar(movieId: Int)
+        fun loadActorTrending(language: String, page: Int)
+        fun loadActorPopular(language: String, page: Int)
+        fun loadActorDetailSimilar(movieId: Int, language: String)
         fun cancelRequest()
     }
 

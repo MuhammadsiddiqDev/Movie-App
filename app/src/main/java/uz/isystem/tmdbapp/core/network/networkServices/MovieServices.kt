@@ -18,33 +18,38 @@ interface MovieServices {
         @Path("media_type") media_type: String,
         @Path("time_window") time_window: String,
         @Query("api_key") apiKey: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("language") language: String
     ): Single<Response<SliderResponse?>>
 
     @GET("/3/movie/top_rated")
     fun getTopRatedMovies(
         @Query("api_key") apiKey: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("language") language: String
     ): Single<Response<TopRatedResponse?>>
 
 
     @GET("/3/movie/popular")
     fun getPopularMovies(
         @Query("api_key") apiKey: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("language") language: String
     ): Single<Response<PopularResponse?>>
 
 
     @GET("/3/movie/now_playing")
     fun getNowPlayingMovies(
         @Query("api_key") apiKey: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("language") language: String
     ): Single<Response<NowPlayingResponse?>>
 
     @GET("/3/movie/upcoming")
     fun getUpcomingMovies(
         @Query("api_key") apiKey: String,
-        @Query("page") page: Int
+        @Query("page") page: Int,
+        @Query("language") language: String
     ): Single<Response<UpcomingResponse?>>
 
 

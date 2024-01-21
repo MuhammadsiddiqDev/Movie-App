@@ -1,4 +1,5 @@
 package uz.isystem.tmdbapp.core.network
+
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import okhttp3.Interceptor
@@ -10,7 +11,12 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import timber.log.Timber
 import uz.isystem.tmdbapp.BuildConfig
-import uz.isystem.tmdbapp.core.network.networkServices.*
+import uz.isystem.tmdbapp.core.network.networkServices.ActorDataServices
+import uz.isystem.tmdbapp.core.network.networkServices.LoginServices
+import uz.isystem.tmdbapp.core.network.networkServices.MovieDataServices
+import uz.isystem.tmdbapp.core.network.networkServices.MovieServices
+import uz.isystem.tmdbapp.core.network.networkServices.SearchService
+import uz.isystem.tmdbapp.core.network.networkServices.WatchService
 import java.util.concurrent.TimeUnit
 
 object ApiClientModule {
@@ -82,7 +88,7 @@ object ApiClientModule {
 //            retentionPeriod = RetentionManager.Period.FOREVER
 //        )
 //    }
-
+//
 //    private fun getChuckerInterceptor(): ChuckerInterceptor {
 //        return ChuckerInterceptor.Builder(App.instance!!)
 //            .collector(getChuckerCollector())
@@ -91,6 +97,8 @@ object ApiClientModule {
 //            .build()
 //
 //    }
+
+
 //    private fun getChuckerCollector(): ChuckerCollector {
 //        return ChuckerCollector(
 //            context = App.instance!!,
@@ -121,22 +129,26 @@ object ApiClientModule {
     private fun getGson(): Gson = GsonBuilder().setLenient().create()
 
     fun getLoginService(): LoginServices {
-        return ApiClientModule.getApiClient().create(LoginServices::class.java)
+        return getApiClient().create(LoginServices::class.java)
+    }
+
+    fun getWatchService(): WatchService {
+        return getApiClient().create(WatchService::class.java)
     }
 
     fun getMovieService(): MovieServices {
-        return ApiClientModule.getApiClient().create(MovieServices::class.java)
+        return getApiClient().create(MovieServices::class.java)
     }
 
     fun getMoviesData(): MovieDataServices {
-        return ApiClientModule.getApiClient().create(MovieDataServices::class.java)
+        return getApiClient().create(MovieDataServices::class.java)
     }
 
     fun getActorData(): ActorDataServices {
-        return ApiClientModule.getApiClient().create(ActorDataServices::class.java)
+        return getApiClient().create(ActorDataServices::class.java)
     }
 
     fun getSearchQueryService(): SearchService {
-        return ApiClientModule.getApiClient().create(SearchService::class.java)
+        return getApiClient().create(SearchService::class.java)
     }
 }

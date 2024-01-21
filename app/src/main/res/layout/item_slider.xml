@@ -9,27 +9,35 @@
         android:id="@+id/slider_group"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="20dp"
-        app:layout_constraintDimensionRatio="5:2.4"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="10dp"
+        app:layout_constraintDimensionRatio="5:2.9"
         app:layout_constraintTop_toTopOf="parent">
 
         <androidx.cardview.widget.CardView
             android:id="@+id/slider_item_card"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:cardCornerRadius="8dp">
+            app:cardCornerRadius="4dp">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/slider_item_image"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:src="@drawable/hrithik"
                 android:scaleType="centerCrop" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_gravity="bottom"
+                android:background="#B4000000" />
 
         </androidx.cardview.widget.CardView>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 
     <TextView
         android:id="@+id/slider_item_name"
@@ -38,13 +46,14 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="7dp"
         android:lines="1"
+        android:maxLines="1"
         android:marqueeRepeatLimit="marquee_forever"
         android:text="Last Seen Alive"
         android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/slider_group" />
+        app:layout_constraintBottom_toTopOf="@id/slider_item_genre" />
 
     <TextView
         android:id="@+id/slider_item_genre"
@@ -58,6 +67,6 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/slider_item_name" />
+        app:layout_constraintBottom_toBottomOf="@id/slider_group" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

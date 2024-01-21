@@ -1,22 +1,25 @@
 package uz.isystem.tmdbapp.ui.main
 
 import android.os.Bundle
-import androidx.appcompat.app.AppCompatActivity
+import android.view.View
 import androidx.navigation.Navigation
 import androidx.navigation.ui.setupWithNavController
 import uz.isystem.tmdbapp.R
 import uz.isystem.tmdbapp.databinding.ActivityMainBinding
+import uz.isystem.tmdbapp.ui.base.BaseActivity
 
-class MainActivity : AppCompatActivity() {
+class MainActivity : BaseActivity() {
 
     private var _binding: ActivityMainBinding? = null
     private val binding get() = _binding!!
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+    override fun getView(): View {
 
-        super.onCreate(savedInstanceState)
         _binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        return binding.root
+    }
+
+    override fun onCreated(savedInstanceState: Bundle?) {
 
         val navigationComponent = Navigation.findNavController(
             this,
@@ -25,4 +28,5 @@ class MainActivity : AppCompatActivity() {
         binding.mainBottomView.setupWithNavController(navigationComponent)
 
     }
+
 }

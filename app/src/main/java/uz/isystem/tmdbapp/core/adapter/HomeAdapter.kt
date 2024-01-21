@@ -5,14 +5,20 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import uz.isystem.tmdbapp.core.models.response.main.home.BaseData
 import uz.isystem.tmdbapp.core.models.response.main.home.UpcomingMovie.UpcomingResponse
 import uz.isystem.tmdbapp.core.models.response.main.home.nowPlayingMovie.MovieData
 import uz.isystem.tmdbapp.core.models.response.main.home.nowPlayingMovie.NowPlayingResponse
 import uz.isystem.tmdbapp.core.models.response.main.home.popularMovie.PopularResponse
 import uz.isystem.tmdbapp.core.models.response.main.home.sliderMovie.SliderResponse
 import uz.isystem.tmdbapp.core.models.response.main.home.topRatedMovie.TopRatedResponse
-import uz.isystem.tmdbapp.databinding.*
-import uz.isystem.tmdbapp.ui.main.home.BaseData
+import uz.isystem.tmdbapp.databinding.NowPlayingItemGroupBinding
+import uz.isystem.tmdbapp.databinding.PopularItemGroupBinding
+import uz.isystem.tmdbapp.databinding.SliderItemGroupBinding
+import uz.isystem.tmdbapp.databinding.TopRatedItemGroupBinding
+import uz.isystem.tmdbapp.databinding.UpcomingItemGroupBinding
+import java.util.Timer
+import java.util.TimerTask
 
 class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
@@ -26,6 +32,10 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     var onSeeAllPopularClicked: ((String) -> Unit)? = null
     var onSeeAllNowPlayingClicked: ((String) -> Unit)? = null
     var onSeeAllUpcomingClicked: ((String) -> Unit)? = null
+
+    private var timer: Timer? = null
+    private var timerTask: TimerTask? = null
+    private val DELAY_MS: Long = 5000 // time between image scroll
 
     private val data = ArrayList<BaseData>()
 
@@ -116,6 +126,22 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
             BaseData.TYPE_SLIDER -> {
                 (holder as TYPE_SLIDER_VH)
                     .bindData((data[position] as SliderResponse).results)
+
+                stopSliderDuration()
+
+                try {
+                    timerTask = object : TimerTask() {
+                        override fun run() {
+                            holder.slider.post {
+                                holder.slider.currentItem = (holder.slider.currentItem + 1) % 20
+                            }
+                        }
+                    }
+                    timer = Timer()
+                    timer?.schedule(timerTask, DELAY_MS, DELAY_MS)
+                } catch (e: IllegalStateException) {
+                    timer?.cancel()
+                }
             }
 
             BaseData.TYPE_TOP_RATED -> {
@@ -150,6 +176,8 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
     inner class TYPE_SLIDER_VH(val binding: SliderItemGroupBinding) :
         RecyclerView.ViewHolder(binding.root) {
+
+        val slider = binding.sliderHome
 
         private val adapter = SliderAdapter()
 
@@ -258,7 +286,7 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
             binding.childList4.adapter = adapter
             var gridLayoutManager =
-                GridLayoutManager(binding.root.context, 3, GridLayoutManager.HORIZONTAL, false)
+                GridLayoutManager(binding.root.context, 4, GridLayoutManager.HORIZONTAL, false)
             binding.childList4.layoutManager = gridLayoutManager
 
 
@@ -274,5 +302,10 @@ class HomeAdapter : RecyclerView.Adapter<RecyclerView.ViewHolder>() {
                 onSeeAllTopRatedClicked!!.invoke("Top Rated Movies")
             }
         }
+    }
+
+    fun stopSliderDuration() {
+        timerTask?.cancel()
+        timer?.cancel()
     }
 }

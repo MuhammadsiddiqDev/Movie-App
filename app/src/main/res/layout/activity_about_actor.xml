@@ -6,32 +6,32 @@
     android:layout_height="match_parent"
     android:background="@color/black">
 
+    <TextView
+        android:id="@+id/movie_name"
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:background="@drawable/shape_edges4"
+        android:gravity="center"
+        android:textColor="@color/white"
+        android:textSize="22sp"
+        android:textStyle="normal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="Actor Name" />
+
+
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:fillViewport="true"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/movie_name">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-
-            <TextView
-                android:id="@+id/movie_name"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/shape_edges"
-                android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Actor Name" />
-
 
             <androidx.cardview.widget.CardView
                 android:id="@+id/card_movie_image"
@@ -40,7 +40,7 @@
                 android:layout_marginTop="40dp"
                 app:cardCornerRadius="8dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/movie_name">
+                app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
@@ -64,7 +64,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/white"
                 android:textSize="23sp"
@@ -74,13 +74,14 @@
                 tools:text="Chris Evans" />
 
             <TextView
+                android:layout_marginTop="70dp"
                 android:id="@+id/known_for_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="30dp"
+                android:text="@string/known_for"
                 android:paddingEnd="10dp"
-                android:text="known for"
+                android:visibility="gone"
                 android:textColor="#C5B9B9"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -92,7 +93,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/white"
                 android:textSize="15sp"
@@ -103,12 +104,13 @@
 
             <TextView
                 android:id="@+id/birthplace_text"
+                android:text="@string/birthplace"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:paddingEnd="10dp"
-                android:text="Birthplace"
+                android:visibility="gone"
                 android:textColor="#C5B9B9"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -120,7 +122,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/white"
                 android:textSize="15sp"
@@ -131,12 +133,13 @@
 
             <TextView
                 android:id="@+id/date_birth_text"
+                android:text="@string/production_companies"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="10dp"
                 android:paddingEnd="10dp"
-                android:text="Production companies:"
+                android:visibility="gone"
                 android:textColor="#C5B9B9"
                 android:textSize="10sp"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -148,7 +151,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
-                android:layout_marginTop="4dp"
+                android:layout_marginTop="2dp"
                 android:paddingEnd="10dp"
                 android:textColor="@color/white"
                 android:textSize="15sp"
@@ -158,12 +161,13 @@
                 tools:text="11 September" />
 
             <TextView
+                android:text="@string/biography"
                 android:id="@+id/movie_overview_text"
                 android:layout_width="0dp"
                 android:layout_height="20dp"
                 android:layout_marginStart="10dp"
                 android:layout_marginTop="20dp"
-                android:text="overview: "
+                android:visibility="gone"
                 android:textColor="@color/green"
                 android:textSize="17sp"
                 app:layout_constraintBottom_toTopOf="@id/movie_overview"
@@ -177,7 +181,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:paddingEnd="10dp"
-                android:layout_marginBottom="30dp"
+                android:layout_marginBottom="10dp"
                 android:textColor="@color/white"
                 android:textSize="13sp"
                 app:layout_constraintBottom_toTopOf="@id/similar_text"
@@ -192,7 +196,7 @@
                 android:layout_marginStart="18dp"
                 android:layout_marginBottom="12dp"
                 android:visibility="invisible"
-                android:text="Movies"
+                android:text="@string/movies"
                 android:textColor="@color/white"
                 android:textSize="18sp"
                 android:textStyle="bold"
@@ -207,6 +211,7 @@
                 android:focusable="true"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
+                app:layout_constraintTop_toBottomOf="@id/movie_overview"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/similar_movies">
 
@@ -216,7 +221,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:padding="8dp"
-                    android:text="see all"
+                    android:text="@string/see_all"
                     android:textColor="@color/green" />
 
                 <ImageButton
@@ -235,14 +240,13 @@
                 android:id="@+id/similar_movies"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="45dp"
                 android:orientation="horizontal"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:layout_marginBottom="20dp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/movie_overview_text"
+                app:layout_constraintTop_toBottomOf="@id/all_button"
                 tools:itemCount="5"
                 tools:listitem="@layout/item_now_playing" />
 

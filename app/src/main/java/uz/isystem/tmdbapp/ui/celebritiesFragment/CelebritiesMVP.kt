@@ -13,8 +13,8 @@ interface CelebritiesMVP {
 
     interface Presenter {
 
-        fun loadCelebritiesCast()
-        fun loadCelebritiesTrending()
+        fun loadCelebritiesCast(language: String)
+        fun loadCelebritiesTrending(language: String)
         fun cancelRequest()
     }
 }

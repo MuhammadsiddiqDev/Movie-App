@@ -3,7 +3,7 @@ package uz.isystem.tmdbapp.core.models.response.main.home.nowPlayingMovie
 
 import androidx.annotation.Keep
 import com.google.gson.annotations.SerializedName
-import uz.isystem.tmdbapp.ui.main.home.BaseData
+import uz.isystem.tmdbapp.core.models.response.main.home.BaseData
 
 @Keep
 data class NowPlayingResponse(

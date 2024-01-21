@@ -1,4 +1,4 @@
-package com.example.movieapp.ui.main.home.searchFragment
+package uz.isystem.tmdbapp.ui.celebritiesFragment
 
 import android.content.Intent
 import android.os.Bundle
@@ -6,13 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.movieapp.ui.main.movieDetails.ActorDetailsActivity
+import com.example.movieapp.ui.main.home.searchFragment.CelebritiesMVP
 import com.example.movieapp.ui.main.seeAllMovies.SeeAllActorActivity
-import com.google.android.material.snackbar.Snackbar
 import uz.isystem.tmdbapp.core.adapter.CelebritiesAdapter
 import uz.isystem.tmdbapp.core.adapter.TrendingPersonAdapter
+import uz.isystem.tmdbapp.core.cache.AppCache
 import uz.isystem.tmdbapp.core.models.response.main.home.popularPeople.PeoplePopularResponse
 import uz.isystem.tmdbapp.databinding.FragmentCelebritiesBinding
+import uz.isystem.tmdbapp.ui.actorDetails.ActorDetailsActivity
 import uz.isystem.tmdbapp.ui.base.BaseFragment
 
 class CelebritiesFragment : BaseFragment(), CelebritiesMVP.View {
@@ -27,13 +28,15 @@ class CelebritiesFragment : BaseFragment(), CelebritiesMVP.View {
         const val MOVIE_TYPE = "Movie_Type"
     }
 
+    private var language = AppCache.appCache?.getLanguage().toString()
+
     private lateinit var binding: FragmentCelebritiesBinding
     override fun createView(
 
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentCelebritiesBinding.inflate(layoutInflater)
         return binding.root
 
@@ -45,14 +48,15 @@ class CelebritiesFragment : BaseFragment(), CelebritiesMVP.View {
         popularRecyclerview()
         trendingRecyclerview()
 
-        celebritiesPresenter.loadCelebritiesCast()
-        celebritiesPresenter.loadCelebritiesTrending()
+        celebritiesPresenter.loadCelebritiesCast(language = language)
+        celebritiesPresenter.loadCelebritiesTrending(language = language)
 
         celebritiesAdapter.onItemClicked = {
             var intent = Intent(requireActivity(), ActorDetailsActivity::class.java)
             intent.putExtra(MOVIE_DATA, it.id)
             startActivity(intent)
         }
+
         trendingAdapter.onItemClicked = {
             var intent = Intent(requireActivity(), ActorDetailsActivity::class.java)
             intent.putExtra(MOVIE_DATA, it.id)
@@ -109,6 +113,10 @@ class CelebritiesFragment : BaseFragment(), CelebritiesMVP.View {
     }
 
     override fun onError(message: String) {
-        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+//        Snackbar.make(binding.root, message, Snackbar.LENGTH_SHORT).show()
+
+        binding.notInternetImage.visibility = View.VISIBLE
+        binding.notInternetText.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.GONE
     }
 }

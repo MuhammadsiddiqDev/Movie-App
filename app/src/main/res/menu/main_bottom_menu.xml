@@ -4,17 +4,17 @@
     <item
         android:id="@+id/moviesFragment"
         android:icon="@drawable/ic_round_local_movies_24"
-        android:title="Movies" />
+        android:title="@string/movies" />
     <item
         android:id="@+id/celebritiesFragment"
         android:icon="@drawable/ic_round_person_24"
-        android:title="Celebrities" />
+        android:title="@string/celebrities" />
     <item
         android:id="@+id/searchFragment"
         android:icon="@drawable/ic_round_search_24"
-        android:title="Search" />
+        android:title="@string/search" />
     <item
         android:id="@+id/TMDBFragment"
-        android:icon="@drawable/ic_round_perm_contact_calendar_24"
-        android:title="TMDB" />
+        android:icon="@drawable/ic_baseline_account_circle_24"
+        android:title="@string/profile" />
 </menu>

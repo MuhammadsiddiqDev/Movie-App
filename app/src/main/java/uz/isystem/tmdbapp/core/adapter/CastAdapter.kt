@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import uz.isystem.tmdbapp.R
 import uz.isystem.tmdbapp.core.models.response.main.home.cast.Cast
 import uz.isystem.tmdbapp.databinding.CelebritiesItemChildBinding
 
@@ -24,8 +25,16 @@ class CastAdapter : RecyclerView.Adapter<CastAdapter.ViewHolder>() {
 
         fun binData(cast: Cast) {
 
-            Glide.with(binding.itemImage).load("https://image.tmdb.org/t/p/w500" + cast.profilePath)
-                .into(binding.itemImage)
+            if (cast.profilePath == null) {
+                Glide.with(binding.itemImage)
+                    .load(R.drawable.not_found)
+                    .into(binding.itemImage)
+            } else {
+
+                Glide.with(binding.itemImage)
+                    .load("https://image.tmdb.org/t/p/w500" + cast.profilePath)
+                    .into(binding.itemImage)
+            }
 
             binding.itemTitle.text = cast.name
             binding.itemSize.text = cast.character

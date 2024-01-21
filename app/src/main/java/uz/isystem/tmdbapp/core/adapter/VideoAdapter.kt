@@ -27,15 +27,13 @@ class VideoAdapter : RecyclerView.Adapter<VideoAdapter.ViewHolder>() {
 
         fun binData(movieData: VideoData) {
 
-            context = context
-
             Glide.with(binding.itemImage)
                 .load("https://img.youtube.com/vi/" + movieData.key + "/hqdefault.jpg")
                 .into(binding.itemImage)
 
             binding.trailerName.text = movieData.name
 
-            binding.imageGroup.setOnClickListener {
+            binding.buttonClick.setOnClickListener {
                 onItemClicked!!.invoke(movieData)
             }
 

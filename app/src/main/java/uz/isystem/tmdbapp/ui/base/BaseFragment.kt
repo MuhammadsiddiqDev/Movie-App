@@ -14,6 +14,8 @@ abstract class BaseFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         return createView(inflater, container, savedInstanceState)
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

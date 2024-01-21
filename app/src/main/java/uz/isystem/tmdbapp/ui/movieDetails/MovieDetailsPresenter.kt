@@ -1,14 +1,18 @@
-package com.example.movieapp.ui.main.movieDetails
+package uz.isystem.tmdbapp.ui.movieDetails
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import io.reactivex.rxjava3.observers.DisposableSingleObserver
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
+import uz.isystem.tmdbapp.BuildConfig
+import uz.isystem.tmdbapp.core.cache.AppCache
+import uz.isystem.tmdbapp.core.models.request.watch.AddWatchRequest
 import uz.isystem.tmdbapp.core.models.response.main.home.cast.CastResponse
 import uz.isystem.tmdbapp.core.models.response.main.home.movieData.movieDetails.MovieDetailsResponse
 import uz.isystem.tmdbapp.core.models.response.main.home.movieData.movieTrailer.MovieTrailerResponse
 import uz.isystem.tmdbapp.core.models.response.main.home.similarMovies.SimilarMoviesResponse
+import uz.isystem.tmdbapp.core.models.response.main.home.watch.AddWatchResponse
 import uz.isystem.tmdbapp.core.network.ApiClientModule
 import uz.isystem.tmdbapp.core.network.networkServices.MovieDataServices
 
@@ -18,9 +22,13 @@ class MovieDetailsPresenter(val view: MovieDetailsMVP.View) : MovieDetailsMVP.Pr
     var movieDetailsServer: MovieDataServices = ApiClientModule.getMoviesData()
 
 
-    override fun loadMovieDetails(movieId: Int) {
+    override fun loadMovieDetails(movieId: Int, language: String) {
         var disposable =
-            movieDetailsServer.getMovieDetails(apiKey = ApiClientModule.apiKey, movieId = movieId)
+            movieDetailsServer.getMovieDetails(
+                apiKey = ApiClientModule.apiKey,
+                movieId = movieId,
+                language = language
+            )
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(object :
@@ -43,11 +51,12 @@ class MovieDetailsPresenter(val view: MovieDetailsMVP.View) : MovieDetailsMVP.Pr
 
     }
 
-    override fun loadSimilarMovies(movieId: Int) {
+    override fun loadSimilarMovies(movieId: Int, language: String) {
         var disposable = movieDetailsServer.getSimilarMovies(
             movieId = movieId,
             apiKey = ApiClientModule.apiKey,
-            page = 1
+            page = 1,
+            language = language
         ).observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribeWith(object : DisposableSingleObserver<Response<SimilarMoviesResponse?>>() {
@@ -70,10 +79,11 @@ class MovieDetailsPresenter(val view: MovieDetailsMVP.View) : MovieDetailsMVP.Pr
         compositeDisposable.add(disposable)
     }
 
-    override fun loadMovieTrailer(movieId: Int) {
+    override fun loadMovieTrailer(movieId: Int, language: String) {
         var disposable = movieDetailsServer.getMovieTrailer(
             movieId = movieId,
-            apiKey = ApiClientModule.apiKey
+            apiKey = ApiClientModule.apiKey,
+            language = language
         ).observeOn(AndroidSchedulers.mainThread())
             .subscribeOn(Schedulers.io())
             .subscribeWith(object : DisposableSingleObserver<Response<MovieTrailerResponse?>>() {
@@ -96,9 +106,13 @@ class MovieDetailsPresenter(val view: MovieDetailsMVP.View) : MovieDetailsMVP.Pr
         compositeDisposable.add(disposable)
     }
 
-    override fun loadMovieCast(movieId: Int) {
+    override fun loadMovieCast(movieId: Int, language: String) {
         var disposable =
-            movieDetailsServer.getCast(apiKey = ApiClientModule.apiKey, movieId = movieId)
+            movieDetailsServer.getCast(
+                apiKey = ApiClientModule.apiKey,
+                movieId = movieId,
+                language = language
+            )
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribeOn(Schedulers.io())
                 .subscribeWith(object :
@@ -124,7 +138,7 @@ class MovieDetailsPresenter(val view: MovieDetailsMVP.View) : MovieDetailsMVP.Pr
     }
 
 
-    override fun markAsFavorite(movieId: Int) {
+    override fun markAsFavorite(movieId: Int, language: String) {
 
     }
 //
@@ -158,6 +172,38 @@ class MovieDetailsPresenter(val view: MovieDetailsMVP.View) : MovieDetailsMVP.Pr
 
     override fun cancelRequest() {
         compositeDisposable.dispose()
+    }
+
+    override fun addSaved(add: Boolean, movieId: Int) {
+        var body = AddWatchRequest(
+            mediaId = movieId,
+            mediaType = "movie",
+            watchlist = add
+        )
+
+        var disposable = movieDetailsServer.addWatch(
+            apiKey = BuildConfig.apiKey,
+            sessionId = AppCache.appCache!!.getUserSession(),
+            addWatchRequest = body
+        )
+            .observeOn(AndroidSchedulers.mainThread()).subscribeOn(Schedulers.io()).subscribeWith(
+                object : DisposableSingleObserver<Response<AddWatchResponse?>>() {
+                    override fun onSuccess(t: Response<AddWatchResponse?>) {
+                        if (t.isSuccessful) {
+                            t.body()?.let {
+                                view.getAddSaved(it)
+                            }
+                        } else {
+                            view.onError(t.message().toString())
+                        }
+                    }
+
+
+                    override fun onError(e: Throwable) {
+                        view.onError(e.message.toString())
+                    }
+
+                })
     }
 
 }

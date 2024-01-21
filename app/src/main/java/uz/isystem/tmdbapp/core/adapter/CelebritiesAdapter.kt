@@ -1,15 +1,19 @@
 package uz.isystem.tmdbapp.core.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import uz.isystem.tmdbapp.R
 import uz.isystem.tmdbapp.core.models.response.main.home.cast.Cast
 import uz.isystem.tmdbapp.databinding.ItemCelebritesBinding
 
 class CelebritiesAdapter : RecyclerView.Adapter<CelebritiesAdapter.ViewHolder>() {
 
     private val data = ArrayList<Cast>()
+
+    var mycon: Context? = null
 
     var onItemClicked: ((Cast) -> Unit)? = null
 
@@ -23,11 +27,20 @@ class CelebritiesAdapter : RecyclerView.Adapter<CelebritiesAdapter.ViewHolder>()
         RecyclerView.ViewHolder(binding.root) {
 
         fun binData(movieData: Cast) {
-            Glide.with(binding.itemImage)
-                .load("https://image.tmdb.org/t/p/w500" + movieData.profilePath)
-                .into(binding.itemImage)
+
+            if (movieData.profilePath == null) {
+                Glide.with(binding.itemImage)
+                    .load(R.drawable.not_found)
+                    .into(binding.itemImage)
+            } else {
+                Glide.with(binding.itemImage)
+                    .load("https://image.tmdb.org/t/p/w500" + movieData.profilePath)
+                    .into(binding.itemImage)
+            }
             binding.itemTitle.text = movieData.name
-            binding.itemSize.text = "popularity ${movieData.popularity}"
+            binding.itemSize.text =
+                "${String.format(mycon!!.resources.getString(R.string.popularity))} ${movieData.popularity}"
+
 
             binding.root.setOnClickListener {
                 onItemClicked!!.invoke(movieData)
@@ -37,6 +50,7 @@ class CelebritiesAdapter : RecyclerView.Adapter<CelebritiesAdapter.ViewHolder>()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        mycon = parent.context
         return ViewHolder(
             ItemCelebritesBinding.inflate(
                 LayoutInflater.from(parent.context),

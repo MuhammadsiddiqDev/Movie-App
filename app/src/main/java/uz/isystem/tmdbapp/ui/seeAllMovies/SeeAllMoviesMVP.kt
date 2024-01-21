@@ -20,13 +20,13 @@ interface SeeAllMoviesMVP {
     }
 
     interface Presenter {
-        fun loadPopularMovies()
-        fun loadNowPlayingMovies()
-        fun loadTopRatedMovies()
-        fun loadUpcomingMovies()
-        fun loadSimilarMovies(movieId: Int)
+        fun loadPopularMovies(language: String, page: Int)
+        fun loadNowPlayingMovies(language: String, page: Int)
+        fun loadTopRatedMovies(language: String, page: Int)
+        fun loadUpcomingMovies(language: String, page: Int)
+        fun loadSimilarMovies(movieId: Int, language: String, page: Int)
         fun cancelRequest()
-        fun loadSimilarActor(movie: Int)
+        fun loadSimilarActor(movie: Int, language: String)
     }
 
 }
